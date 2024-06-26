@@ -9,7 +9,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 	@Repository
 	public interface ProductRepository extends JpaRepository<Product, Integer> {
@@ -17,17 +20,20 @@ import java.util.Optional;
 
 		  @Modifying
 	  @Query(value = "  Select * FROM product WHERE product.name = :name",
-//			  update Users u set u.status = ? where u.name = )
 	    nativeQuery = true)
 	  Optional<Product> findByIName(String name);
 
 
 	  @Modifying
 	  @Query(value = "  UPDATE product SET product.name = :model.getName() , product.description = :model.getDescription(), product.price =  :model.getPrice(),  product.stock= :model.getStock(),product.amount = :model.getAmount() WHERE product.id = :model.getId()",
-//			  update Users u set u.status = ? where u.name = )
 	    nativeQuery = true)
 	  int updateProductSetStatusForNameNative(ProductModel model);
 
+  @Modifying
+	  @Transactional
+	  @Query(value = "  UPDATE product SET ticket.stock= :status WHERE product.id = :id",
+	    nativeQuery = true)
+	  int updateProductSetStatusForNameNativeStock(int id, boolean status);
 
 	
 }

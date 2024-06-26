@@ -14,7 +14,7 @@ public interface ProductService {
 
       public abstract  ProductModel getProductByName(String name);
 		
-      public abstract boolean deleteProductById(int id);
+      public abstract boolean deleteProductById(int id, boolean status);
 	   
 	  public abstract ProductModel editarProductModel(ProductModel productModel);
 	    

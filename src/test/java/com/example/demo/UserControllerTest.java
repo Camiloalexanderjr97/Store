@@ -169,7 +169,7 @@ public class UserControllerTest {
 
         ResponseEntity<?> response = userController.deleteUser(userId);
                 assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals("User not found", ((Mensaje) response.getBody()).getMensaje());
+        assertEquals("User not found with id: 1", ((Mensaje) response.getBody()).getMensaje());
     }
 
     @Test
@@ -181,6 +181,6 @@ public class UserControllerTest {
         ResponseEntity<?> response = userController.editUser(1,newUser, mock(BindingResult.class));
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals("User not found", ((Mensaje) response.getBody()).getMensaje());
+        assertEquals("User not found with id: 1", ((Mensaje) response.getBody()).getMensaje());
     }
 }

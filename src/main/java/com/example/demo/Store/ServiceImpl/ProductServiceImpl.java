@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -47,11 +48,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public boolean deleteProductById(int id) {
+	public boolean deleteProductById(int id, boolean status) {
 		boolean resultado = false;
 		try {
-			productRepository.deleteById(id);
-			resultado = true;
+			if (productRepository.updateProductSetStatusForNameNativeStock(id, status) != 1)
+				resultado = true;
 		} catch (Exception e) {
 			System.out.println(e);
 		}

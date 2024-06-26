@@ -17,5 +17,4 @@ public interface TicketService {
 		
       public abstract boolean deleteTicketLogictById(int id, boolean status);
 	   
-	  public abstract int editarTicketModel(TicketModel ticketModel);
 }

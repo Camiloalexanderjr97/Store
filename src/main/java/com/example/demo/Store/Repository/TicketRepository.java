@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 	  @Modifying
 	  @Transactional
 	  @Query(value = "  UPDATE ticket SET ticket.is_active= :status,  ticket.modified= :modified WHERE ticket.id = :id",
-//			  update Users u set u.status = ? where u.name = )
 	    nativeQuery = true)
 	  int updateTicketSetStatusForNameNative(int id, boolean status, LocalDateTime modified);
 

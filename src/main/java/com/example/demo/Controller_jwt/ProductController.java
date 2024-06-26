@@ -72,15 +72,15 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/products/delete/{id}")
-    public ResponseEntity<?> deleteProductModel(@PathVariable int id) {
-
+    @DeleteMapping("/products/delete")
+    public ResponseEntity<?> deleteProductLogicModel(@RequestParam int id,@RequestParam String status) {
+        boolean stat = Boolean.parseBoolean(status);
         try {
             if (productService.getProductById(id)==null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Mensaje("Product not found with id: "+id, null));
             }else{
-				productService.deleteProductById(id);
-				return ResponseEntity.ok(new Mensaje("Product #:"+id+"Deleted", null));
+				productService.deleteProductById(id, stat);
+				return ResponseEntity.ok(new Mensaje("Product #:"+id+"Deleted(Desactivated)", null));
 			}
         } catch (HibernateException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Mensaje("Internal Server Error",null));

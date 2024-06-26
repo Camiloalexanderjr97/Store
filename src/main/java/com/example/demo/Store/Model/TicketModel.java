@@ -22,5 +22,7 @@ public class TicketModel {
 	private int idUser;
 	private String nameUser;
 	private String nameProduct;
+	private String mensaje;
+	private int isValid;
 
 }
